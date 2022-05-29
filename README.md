@@ -2,6 +2,8 @@
 
 Desarrollo de la solución para el CHALLENGE BACKEND - Java Spring Boot (API) de Alkemy.
 
+Las consignas/especificaciones se encuentran en la carpeta /Doc
+
 ## ESPECIFICACIONES
 
 SDK: Java 8 (OpenJDK 1.8.0_312)
