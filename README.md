@@ -2,7 +2,7 @@
 
 Desarrollo de la solución para el CHALLENGE BACKEND - Java Spring Boot (API) de Alkemy.
 
-Las consignas/especificaciones se encuentran en la carpeta /Doc
+Las consignas/requerimientos se encuentran en la carpeta /Doc
 
 ## ESPECIFICACIONES
 
