@@ -39,26 +39,14 @@ public class DomainDtoMapper {
 
     public MediaCharacter characterDtoToEntity(MediaCharacterDto dto) {
         MediaCharacter characterEntity = this.characterConverter.convertToEntity(dto);
-        Set<MediaWork> mediaWorkEntities = new LinkedHashSet<>();
-        if (dto.getMediaWorks() != null) {
-            mediaWorkEntities = dto.getMediaWorks()
-                    .stream()
-                    .map(this.mediaWorkConverter::convertToEntity)
-                    .collect(Collectors.toSet());
-        }
+        Set<MediaWork> mediaWorkEntities = this.mediaWorkConverter.convertToEntitySet( dto.getMediaWorks() );
         characterEntity.setMediaWorks(mediaWorkEntities);
         return characterEntity;
     }
 
     public MediaCharacterDto characterToDto(MediaCharacter characterEntity) {
         MediaCharacterDto dto = this.characterConverter.convertToDto(characterEntity);
-        Collection<MediaWorkDto> mediaWorkDtos = new ArrayList<>();
-        if (characterEntity.getMediaWorks() != null) {
-            mediaWorkDtos = characterEntity.getMediaWorks()
-                    .stream()
-                    .map(this.mediaWorkConverter::convertToDto)
-                    .collect(Collectors.toList());
-        }
+        Collection<MediaWorkDto> mediaWorkDtos = this.mediaWorkConverter.convertToDtoList( characterEntity.getMediaWorks() );
         dto.setMediaWorks(mediaWorkDtos);
         return dto;
     }
@@ -69,68 +57,32 @@ public class DomainDtoMapper {
 
     public MediaGenre genreDtoToEntity(MediaGenreDto dto) {
         MediaGenre genreEntity = this.genreConverter.convertToEntity(dto);
-        Set<MediaWork> mediaWorkEntities = new LinkedHashSet<>();
-        if (dto.getMediaWorks() != null) {
-            mediaWorkEntities = dto.getMediaWorks()
-                    .stream()
-                    .map(this.mediaWorkConverter::convertToEntity)
-                    .collect(Collectors.toSet());
-        }
+        Set<MediaWork> mediaWorkEntities = this.mediaWorkConverter.convertToEntitySet( dto.getMediaWorks() );
         genreEntity.setMediaWorks(mediaWorkEntities);
         return genreEntity;
     }
 
     public MediaGenreDto genreToDto(MediaGenre genreEntity) {
         MediaGenreDto dto = this.genreConverter.convertToDto(genreEntity);
-        Collection<MediaWorkDto> mediaWorkDtos = new ArrayList<>();
-        if (genreEntity.getMediaWorks() != null) {
-            mediaWorkDtos = genreEntity.getMediaWorks()
-                    .stream()
-                    .map(this.mediaWorkConverter::convertToDto)
-                    .collect(Collectors.toList());
-        }
+        Collection<MediaWorkDto> mediaWorkDtos = this.mediaWorkConverter.convertToDtoList( genreEntity.getMediaWorks() );
         dto.setMediaWorks(mediaWorkDtos);
         return dto;
     }
 
     public MediaWork mediaWorkDtoToEntity(MediaWorkDto dto) {
         MediaWork mediaWorkEntity = this.mediaWorkConverter.convertToEntity(dto);
-        Set<MediaCharacter> mediaCharacterEntities = new LinkedHashSet<>();
-        if (dto.getMediaCharacters() != null) {
-            mediaCharacterEntities = dto.getMediaCharacters()
-                    .stream()
-                    .map(this.characterConverter::convertToEntity)
-                    .collect(Collectors.toSet());
-        }
+        Set<MediaCharacter> mediaCharacterEntities = this.characterConverter.convertToEntitySet( dto.getMediaCharacters() );
         mediaWorkEntity.setMediaCharacters(mediaCharacterEntities);
-        Set<MediaGenre> mediaGenreEntities = new LinkedHashSet<>();
-        if (dto.getMediaGenres() != null) {
-            mediaGenreEntities = dto.getMediaGenres()
-                    .stream()
-                    .map(this.genreConverter::convertToEntity)
-                    .collect(Collectors.toSet());
-        }
+        Set<MediaGenre> mediaGenreEntities = this.genreConverter.convertToEntitySet( dto.getMediaGenres() );
         mediaWorkEntity.setMediaGenres(mediaGenreEntities);
         return mediaWorkEntity;
     }
 
     public MediaWorkDto mediaWorkToDto(MediaWork mediaWorkEntity) {
         MediaWorkDto dto = this.mediaWorkConverter.convertToDto(mediaWorkEntity);
-        Collection<MediaCharacterDto> mediaCharacterDtos = new ArrayList<>();
-        if (mediaWorkEntity.getMediaCharacters() != null) {
-            mediaCharacterDtos = mediaWorkEntity.getMediaCharacters()
-                    .stream()
-                    .map(this.characterConverter::convertToDto)
-                    .collect(Collectors.toList());
-        }
+        Collection<MediaCharacterDto> mediaCharacterDtos = this.characterConverter.convertToDtoList( mediaWorkEntity.getMediaCharacters() );
         dto.setMediaCharacters(mediaCharacterDtos);
-        Collection<MediaGenreDto> mediaGenreDtos = new ArrayList<>();
-        if (mediaWorkEntity.getMediaGenres() != null) {
-            mediaGenreDtos = mediaWorkEntity.getMediaGenres()
-                    .stream()
-                    .map(this.genreConverter::convertToDto)
-                    .collect(Collectors.toList());
-        }
+        Collection<MediaGenreDto> mediaGenreDtos = this.genreConverter.convertToDtoList( mediaWorkEntity.getMediaGenres() );
         dto.setMediaGenres(mediaGenreDtos);
         return dto;
     }

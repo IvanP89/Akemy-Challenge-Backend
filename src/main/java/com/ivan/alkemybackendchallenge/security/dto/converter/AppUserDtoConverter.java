@@ -21,15 +21,7 @@ public class AppUserDtoConverter extends Converter<AppUserDto, AppUser> {
         if (dto == null) {
             return null;
         }
-        Collection<Role> roles;
-        if (dto.getRoles()!= null && !dto.getRoles().isEmpty()) {
-            DtoEntityConverter<RoleDto, Role> roleDtoConverter = new RoleDtoConverter();
-            roles = dto.getRoles().stream()
-                    .map(roleDtoConverter::convertToEntity)
-                    .collect(Collectors.toList());
-        } else {
-            roles = new ArrayList<>();
-        }
+        Collection<Role> roles = new RoleDtoConverter().convertToEntityList( dto.getRoles() );
         return new AppUser(
                 dto.getId(),
                 dto.getEmail(),
@@ -45,15 +37,7 @@ public class AppUserDtoConverter extends Converter<AppUserDto, AppUser> {
         if (appUser == null) {
             return null;
         }
-        Collection<RoleDto> roleDtos;
-        if (appUser.getRoles() != null && !appUser.getRoles().isEmpty()) {
-            DtoEntityConverter<RoleDto, Role> roleDtoConverter = new RoleDtoConverter();
-            roleDtos = appUser.getRoles().stream()
-                    .map(roleDtoConverter::convertToDto)
-                    .collect(Collectors.toList());
-        } else {
-            roleDtos = new ArrayList<>();
-        }
+        Collection<RoleDto> roleDtos = new RoleDtoConverter().convertToDtoList( appUser.getRoles() );
         return new AppUserDto(
                 appUser.getId(),
                 appUser.getEmail(),
