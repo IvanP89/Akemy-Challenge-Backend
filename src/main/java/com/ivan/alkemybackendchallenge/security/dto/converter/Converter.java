@@ -1,7 +1,6 @@
 package com.ivan.alkemybackendchallenge.security.dto.converter;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -38,7 +37,7 @@ public class Converter <T, R> implements DtoEntityConverter<T, R> {
     @Override
     public final List<R> convertToEntityList(Collection<T> dtos) {
         if (dtos == null) {
-            return null;
+            return new ArrayList<>();
         }
         return dtos.stream()
                 .map(this::convertToEntity)
@@ -46,13 +45,33 @@ public class Converter <T, R> implements DtoEntityConverter<T, R> {
     }
 
     @Override
+    public Set<R> convertToEntitySet(Collection<T> dtos) {
+        if (dtos == null) {
+            return new LinkedHashSet<>();
+        }
+        return dtos.stream()
+                .map(this::convertToEntity)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
     public final List<T> convertToDtoList(Collection<R> entities) {
         if (entities == null) {
-            return null;
+            return new ArrayList<>();
         }
         return entities.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Set<T> convertToDtoSet(Collection<R> entities) {
+        if (entities == null) {
+            return new LinkedHashSet<>();
+        }
+        return entities.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toSet());
     }
 
 }
